@@ -60,16 +60,16 @@ def convolution3D(inputData, filter_name):
     # Iterate all positions in the image with your kernel.
     # Some variable you may use: dx, dy, dz, inputData, kernel, outputData
     # You need to implement your convolution operation here.
+    pad_width = list()
+    for i in range(3):
+        pad_size = kernel.shape[i] - 1
+        pad_width.append((pad_size // 2, pad_size - pad_size // 2))
+    inputData = np.pad(inputData, pad_width, mode='constant', constant_values=0)
     common_type = np.find_common_type([inputData.dtype, kernel.dtype], [])
     orig_dtype = inputData.dtype
     inputData = inputData.astype(common_type)
     kernel = kernel.astype(common_type)
     outputData = mie.conv3d(inputData, kernel)
-    pad_width = list()
-    for i in range(3):
-        pad_size = inputData.shape[i] - outputData.shape[i]
-        pad_width.append((pad_size // 2, pad_size - pad_size // 2))
-    outputData = np.pad(outputData, pad_width, mode='constant', constant_values=0)
     outputData = outputData.astype(orig_dtype)
     ############### Add your code above ######################
     return outputData

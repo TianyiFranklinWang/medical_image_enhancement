@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstdint>
-#include "conv3d.cuh"
+#include "include/conv3d.cuh"
 
 template __global__ void convolution3d<float>(float *, float *, float *, dim3, dim3, dim3);
 

@@ -3,6 +3,7 @@ project(medical_image_enhancement LANGUAGES CXX CUDA)
 
 find_package(CUDA REQUIRED)
 add_subdirectory(pybind11)
+include_directories(include)
 
 # Set CUDA flags
 set(CMAKE_CUDA_STANDARD 11)

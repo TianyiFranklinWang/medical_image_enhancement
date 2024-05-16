@@ -2,12 +2,13 @@
 #include <pybind11/numpy.h>
 #include <cuda_runtime.h>
 #include <iostream>
-#include "conv3d.cuh"
+#include "include/conv3d.cuh"
 
 namespace py = pybind11;
 
 template<typename T>
-py::array_t<T> convolve3d(py::array_t<T, py::array::c_style | py::array::forcecast> input, py::array_t<T, py::array::c_style | py::array::forcecast> kernel) {
+py::array_t<T> convolve3d(py::array_t<T, py::array::c_style | py::array::forcecast> input,
+                          py::array_t<T, py::array::c_style | py::array::forcecast> kernel) {
     py::buffer_info input_info = input.request();
     py::buffer_info kernel_info = kernel.request();
 
