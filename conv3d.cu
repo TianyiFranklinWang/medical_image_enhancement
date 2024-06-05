@@ -103,9 +103,10 @@ void convolution3d_wrapper(T *input, T *kernel, T *output, dim3 input_shape, dim
     size_t sharedMemSize = kernel_size * sizeof(T);
     convolution3d<<<numBlocks, threadsPerBlock, sharedMemSize, stream>>>(d_input, d_kernel, d_output, input_shape,
                                                                          kernel_shape, output_shape);
-    cudaStreamSynchronize(stream);
 
     cudaMemcpyAsync(output, d_output, output_size * sizeof(T), cudaMemcpyDeviceToHost, stream);
+
+    cudaStreamSynchronize(stream);
 
     cudaFree(d_input);
     cudaFree(d_kernel);
